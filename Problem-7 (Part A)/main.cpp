@@ -6,17 +6,14 @@ int main()
     int sz;
     cout << "The size of an array= ";
     cin >> sz;
-
     int arr[sz], new_arr[sz];
     cout << "Enter the values of a array:" << endl;
     for(int i=0; i<sz; i++){
         cin >> arr[i];
     }
-
     int x;
     cout << "Removing element= ";
     cin >> x;
-
     int i = 0;
     for(int j=0; j<sz; j++){
         if(arr[j]!=x){
