@@ -13,40 +13,39 @@ struct node* createNode(int value){
     return newNode;
 }
 
-void remove_duplicates(struct node* head){
+void check_palindrome(struct node* head){
     if(head == NULL){
         printf("There is no Linked List\n");
         return;
     }
 
-    struct node* current = head;
-    struct node* prev = NULL;
-    struct node* temp = NULL;
+    int count = 0;
+    struct node* temp = head;
+    while(temp != NULL){
+        count++;
+        temp = temp->next;
+    }
 
-    while(current != NULL){
-        prev = current;
-        temp = current->next;
+    int arr[count];
+    temp = head;
+    int i = 0;
+    while(temp != NULL){
+        arr[i++] = temp->data;
+        temp = temp->next;
+    }
 
-        while(temp != NULL){
-            if(temp->data == current->data){
-                prev->next = temp->next;
-                free(temp);
-                temp = prev->next;
-            } else {
-                prev = temp;
-                temp = temp->next;
-            }
+    int flag = 1;
+    for(int j = 0; j < count/2; j++){
+        if(arr[j] != arr[count - j - 1]){
+            flag = 0;
+            break;
         }
-        current = current->next;
     }
 
-    printf("\nAfter removing duplicates, linked list is: ");
-    struct node* ptr = head;
-    while(ptr != NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->next;
-    }
-    printf("\n");
+    if(flag)
+        printf("\nThe linked list is a palindrome.\n");
+    else
+        printf("\nThe linked list is NOT a palindrome.\n");
 }
 
 int main()
@@ -75,10 +74,6 @@ int main()
         }
     }
 
-    int old_val;
-    printf("Targeted value: ");
-    scanf("%d",&old_val);
-
     printf("The original linked list is: ");
     struct node* ptr = head;
     while(ptr != NULL){
@@ -86,7 +81,7 @@ int main()
         ptr = ptr->next;
     }
 
-    remove_duplicates(head);
+    check_palindrome(head);
 
     return 0;
 }
